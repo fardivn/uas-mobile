@@ -88,18 +88,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           FilledButton(
               onPressed: () {
-                service
-                    .addData(nimController.value.text,
-                        namaController.value.text, kelasController.value.text)
-                    .whenComplete(() {
-                  setState(() {
-                    listMhs.clear();
-                    nimController.clear();
-                    namaController.clear();
-                    kelasController.clear();
-                    getData();
-                  });
-                });
+                service.addData(nimController.value.text,
+                    namaController.value.text, kelasController.value.text);
+                nimController.clear();
+                namaController.clear();
+                kelasController.clear();
+                listMhs.clear();
+                getData();
               },
               child: const Text("Submit")),
           const SizedBox(
@@ -121,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Row(
                           children: [
                             SizedBox(
-                              width: 300,
+                              width: 325,
                               child: ListTile(
                                 title: Text(
                                   listMhs[index].nama,
