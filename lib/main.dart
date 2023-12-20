@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:uas_mobile/models/mahasiswa.dart';
 import 'package:uas_mobile/service/service.dart';
 
 void main() {
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'API (Farah 2141762091)'),
+      home: const MyHomePage(title: 'API'),
     );
   }
 }
@@ -118,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Row(
                           children: [
                             SizedBox(
-                              width: 325,
+                              width: 300,
                               child: ListTile(
                                 title: Text(
                                   listMhs[index].nama,
