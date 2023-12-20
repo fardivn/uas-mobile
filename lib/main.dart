@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uas_mobile/models/mahasiswa.dart';
+// import 'package:uas_mobile/models/mahasiswa.dart';
 import 'package:uas_mobile/service/service.dart';
 
 void main() {
@@ -68,10 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
         width: 400,
         margin: const EdgeInsets.all(10),
         child: Column(children: [
-          const Text(
-            "Input Data",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
           TextFormField(
             controller: nimController,
             decoration: const InputDecoration(labelText: "NIM"),
@@ -90,25 +86,70 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(
             height: 20,
           ),
-          OutlinedButton(
+          FilledButton(
               onPressed: () {
-                service.addData(nimController.text, namaController.text,
-                    kelasController.text);
+                service
+                    .addData(nimController.value.text,
+                        namaController.value.text, kelasController.value.text)
+                    .whenComplete(() {
+                  setState(() {
+                    listMhs.clear();
+                    nimController.clear();
+                    namaController.clear();
+                    kelasController.clear();
+                    getData();
+                  });
+                });
               },
-              child: const Text("Tambah Data")),
+              child: const Text("Submit")),
+          const SizedBox(
+            height: 20,
+          ),
+          const Text(
+            "Data Mahasiswa",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
           const SizedBox(
             height: 20,
           ),
           Expanded(
             child: listMhs.isEmpty
                 ? const Text("Tidak ada data")
-                : ListView.builder(itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(listMhs[index].nama),
-                      subtitle: Text(
-                          "${listMhs[index].nim} | ${listMhs[index].kelas}"),
-                    );
-                  }),
+                : ListView.builder(
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 300,
+                              child: ListTile(
+                                title: Text(
+                                  listMhs[index].nama,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                subtitle: Text(
+                                    "${listMhs[index].nim} | ${listMhs[index].kelas}"),
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () {
+                                  service
+                                      .deleteData(listMhs[index].id)
+                                      .whenComplete(() {
+                                    setState(() {
+                                      listMhs.removeWhere((element) =>
+                                          element.id == listMhs[index].id);
+                                    });
+                                  });
+                                },
+                                icon: const Icon(Icons.delete_rounded))
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: listMhs.length,
+                  ),
           ),
         ]),
       )),

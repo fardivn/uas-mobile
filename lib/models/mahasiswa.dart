@@ -4,19 +4,9 @@ class Mahasiswa {
   late String nama;
   late String kelas;
 
-  Mahasiswa(this.id, this.nim, this.nama, this.kelas);
-
-  Mahasiswa.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    nim = json["nim"];
-    nama = json["nama"];
-    kelas = json["kelas"];
-  }
-
-  // Map<String, dynamic> toJson() => {
-  //       "id": id,
-  //       "nim": nim,
-  //       "nama": nama,
-  //       "kelas": kelas,
-  //     };
+  Mahasiswa(
+      {required this.id,
+      required this.nim,
+      required this.nama,
+      required this.kelas});
 }
