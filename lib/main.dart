@@ -88,8 +88,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           FilledButton(
               onPressed: () {
-                service.addData(nimController.value.text,
-                    namaController.value.text, kelasController.value.text);
+                service.addData(
+                    nimController.value.text,
+                    namaController.value.text.toUpperCase(),
+                    kelasController.value.text.toUpperCase());
                 nimController.clear();
                 namaController.clear();
                 kelasController.clear();
