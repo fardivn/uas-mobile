@@ -1,4 +1,4 @@
-# uas_mobile
+# uas-mobile
 
 A new Flutter project.
 
